@@ -69,9 +69,10 @@
             
             //Read the data
             d3.csv("https://raw.githubusercontent.com/pineappleblack/tinkoff-fines/master/fines_data.csv", function(data) {
-              console.log(data[0].law)
 
-              data = data.slice().sort((a, b) => d3.descending(a.law, b.law))
+              data = data.slice().sort((a, b) => d3.ascending(parseFloat(a.law_number), parseFloat(b.law_number)))
+
+              console.log(data)
 
               var punishments = []
               var laws = []
@@ -114,19 +115,21 @@
                   .attr("height", y.bandwidth() )
                   .style("fill", function(d) { if (d.punished_percent > 0) return myColor(d.punished_percent * 100); else return "#fff" } )
                   .style("opacity", function(d) { if (d.punished_percent > 0) return 1; else return 0 } )
-                  .on("mouseover", function(d) {		
+                  .on("mouseover", function(d) {	
+                    if (d.punished_percent > 0) {
                       div.transition()		
                           .duration(200)		
                           .style("opacity", .9);		
                       div	.html(d.law + "<br/>"  + d.punished_percent)	
                           .style("left", (d3.event.pageX) + "px")		
                           .style("top", (d3.event.pageY - 28) + "px");	
-                      })					
+                      }
+                   })					
                   .on("mouseout", function(d) {		
                       div.transition()		
                           .duration(500)		
                           .style("opacity", 0);	
-                  });
+                   });
             
             })
             
