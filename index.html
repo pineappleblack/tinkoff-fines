@@ -70,9 +70,8 @@
             //Read the data
             d3.csv("https://raw.githubusercontent.com/pineappleblack/tinkoff-fines/master/fines_data.csv", function(data) {
 
-              data = data.slice().sort((a, b) => d3.ascending(parseFloat(a.law_number), parseFloat(b.law_number)))
-
-              console.log(data)
+              data = data.slice().sort((a, b) => d3.ascending(parseFloat(a.law_number), parseFloat(b.law_number))
+              || d3.descending(a.punishment_order, b.punishment_order))
 
               var punishments = []
               var laws = []
