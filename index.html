@@ -48,7 +48,7 @@
         <script>
 
             // set the dimensions and margins of the graph
-            var margin = {top: 30, right: 0, bottom: 30, left: 0},
+            var margin = {top: 0, right: 0, bottom: 0, left: 0},
               width = 450 - margin.left - margin.right,
               height = 450 - margin.top - margin.bottom;
             
@@ -97,6 +97,8 @@
                 .range([ height, 0 ])
                 .domain(punishments)
                 .padding(0.01);
+                svg.append("g")
+                  .call(d3.axisLeft(y));
             
               // Build color scale
               var myColor = d3.scaleLinear()
