@@ -37,13 +37,23 @@
             line-height: 20px;
             color: #999999;
           }
+
+          .punish_text {
+            font-family: Graphik,Helvetica Neue,Helvetica,Arial,sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 20px;
+            color: #999999;
+          }
+
         </style>
     </head>
     <body>
         <!-- Create a div where the graph will take place -->
         <h1>Как часто используют разные виды наказаний за правонарушения в сфере экономики<h1>
-        <h2>Самая частая мера — штраф</h2>
-        <div id="my_dataviz"></div>
+        <h2>Самая распространённая мера — штраф</h2>
+        <div id="graph"></div>
 
         <script>
 
@@ -53,7 +63,7 @@
               height = 450 - margin.top - margin.bottom;
             
             // append the svg object to the body of the page
-            var svg = d3.select("#my_dataviz")
+            var svg = d3.select("#graph")
             .append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
@@ -97,17 +107,32 @@
                 .range([ height, 0 ])
                 .domain(punishments)
                 .padding(0.01);
-                svg.append("g")
-                  .call(d3.axisLeft(y));
             
               // Build color scale
               var myColor = d3.scaleLinear()
                 .range(["#E3B1A9", "#AB4737"])
                 .domain([1,100])
 
+              svg
+                  .append("g") 
+                  .attr("transform",
+                      "translate(" + margin.left + "," + margin.top + ")")
+                  .attr("class", "punish_text")
+                  .selectAll()
+                  .data(punishments)
+                  .enter()
+                  .append("text")
+                  .attr("y", function(d) { return y(d) + y.bandwidth() / 2 })
+                  .attr("fill", "#999999")
+                  .text(function(d) { return d })
+
               // adding squares
-              svg.selectAll()
-                  .data(data, function(d) {return d.punishment+':'+d.law;})
+              svg
+                  .append("g")
+                  .attr("transform",
+                      "translate(50, 0)")
+                  .selectAll()
+                  .data(data)
                   .enter()
                   .append("rect")
                   .attr("x", function(d) { return x(d.law) })
