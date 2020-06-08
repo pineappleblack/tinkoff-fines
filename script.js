@@ -21,7 +21,7 @@ function build_graph() {
 
     // Создание канваса
     if (window.innerWidth > 300) 
-        total_width = window.innerWidth * 0.95
+        total_width = window.innerWidth * 0.97
     else
         total_width = 300
 
