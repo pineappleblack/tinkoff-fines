@@ -1,5 +1,5 @@
 function define_styles() {
-    if (window.innerWidth < 700) {
+    if (window.innerWidth < 600) {
         mobile = true
         nomalFontSize = 12
         offset = 10
@@ -20,10 +20,10 @@ function build_graph() {
     height = 300
 
     // Создание канваса
-    if (window.innerWidth > 450) 
+    if (window.innerWidth > 300) 
         total_width = window.innerWidth
     else
-        total_width = 450
+        total_width = 300
 
     var svg = d3.select("#graph")
         .append("svg")
@@ -249,94 +249,96 @@ function build_graph() {
 
     // Аннотации
 
-    law1 = 'Статья 7.27. Мелкое хищение'
-    law2 = 'Статья 8.17. Нарушение регламентирующих деятельность во внутренних морских водах, в территориальном море, на континентальном шельфе, в исключительной экономической зоне Российской Федерации или открытом море требований или условий лицензии'
+    if (!mobile) {
+        law1 = 'Статья 7.27. Мелкое хищение'
+        law2 = 'Статья 8.17. Нарушение регламентирующих деятельность во внутренних морских водах, в территориальном море, на континентальном шельфе, в исключительной экономической зоне Российской Федерации или открытом море требований или условий лицензии'
 
-    graph
-        .append("line")
-        .attr("x1", x(law1))  
-        .attr("y1", 0 + offset_xlabel)
-        .attr("x2", x(law1)) 
-        .attr("y2", height + y.bandwidth() + offset_xlabel)
-        .style("stroke-width", 1)
-        .style("stroke", "#999999")
+        graph
+            .append("line")
+            .attr("x1", x(law1))  
+            .attr("y1", 0 + offset_xlabel)
+            .attr("x2", x(law1)) 
+            .attr("y2", height + y.bandwidth() + offset_xlabel)
+            .style("stroke-width", 1)
+            .style("stroke", "#999999")
 
-    graph
-        .append("line")
-        .attr("x1", x(law2))  
-        .attr("y1", 0 + offset_xlabel)
-        .attr("x2", x(law2)) 
-        .attr("y2", height + offset_xlabel)
-        .style("stroke-width", 1)
-        .style("stroke", "#999999")
+        graph
+            .append("line")
+            .attr("x1", x(law2))  
+            .attr("y1", 0 + offset_xlabel)
+            .attr("x2", x(law2)) 
+            .attr("y2", height + offset_xlabel)
+            .style("stroke-width", 1)
+            .style("stroke", "#999999")
 
-    label = graph
-        .append("text")
-        .attr("y", height + offset_xlabel)
-        .attr("fill", "#999999")
-        .style("font-size", nomalFontSize +"px")
+        label = graph
+            .append("text")
+            .attr("y", height + offset_xlabel)
+            .attr("fill", "#999999")
+            .style("font-size", nomalFontSize +"px")
 
-    label
-        .append("tspan")
-        .text("Мелкое")
-        .attr("x", x(law1))
-        .attr("dx", "0.4em")
-        .attr("dy", "1.2em")
+        label
+            .append("tspan")
+            .text("Мелкое")
+            .attr("x", x(law1))
+            .attr("dx", "0.4em")
+            .attr("dy", "1.2em")
 
-    label
-        .append("tspan")
-        .text("хищение")
-        .attr("x", x(law1))
-        .attr("dx", "0.4em")
-        .attr("dy", "1.2em")
+        label
+            .append("tspan")
+            .text("хищение")
+            .attr("x", x(law1))
+            .attr("dx", "0.4em")
+            .attr("dy", "1.2em")
 
-    law1 = "Статья 16.1. Незаконное перемещение через таможенную границу Таможенного союза товаров и (или) транспортных средств международной перевозки"
-    law2 = "Статья 17.7. Невыполнение законных требований прокурора, следователя, дознавателя или должностного лица, осуществляющего производство по делу об административном правонарушении"
+        law1 = "Статья 16.1. Незаконное перемещение через таможенную границу Таможенного союза товаров и (или) транспортных средств международной перевозки"
+        law2 = "Статья 17.7. Невыполнение законных требований прокурора, следователя, дознавателя или должностного лица, осуществляющего производство по делу об административном правонарушении"
 
-    graph
-        .append("line")
-        .attr("x1", x(law1))  
-        .attr("y1", 0 + offset_xlabel)
-        .attr("x2", x(law1)) 
-        .attr("y2", height + offset_xlabel)
-        .style("stroke-width", 1)
-        .style("stroke", "#999999")
+        graph
+            .append("line")
+            .attr("x1", x(law1))  
+            .attr("y1", 0 + offset_xlabel)
+            .attr("x2", x(law1)) 
+            .attr("y2", height + offset_xlabel)
+            .style("stroke-width", 1)
+            .style("stroke", "#999999")
 
-    graph
-        .append("line")
-        .attr("x1", x(law2))  
-        .attr("y1", 0 + offset_xlabel)
-        .attr("x2", x(law2)) 
-        .attr("y2", height - y.bandwidth() + offset_xlabel)
-        .style("stroke-width", 1)
-        .style("stroke", "#999999")
+        graph
+            .append("line")
+            .attr("x1", x(law2))  
+            .attr("y1", 0 + offset_xlabel)
+            .attr("x2", x(law2)) 
+            .attr("y2", height - y.bandwidth() + offset_xlabel)
+            .style("stroke-width", 1)
+            .style("stroke", "#999999")
 
-    label = graph
-        .append("text")
-        .attr("y", height - y.bandwidth() + offset_xlabel)
-        .attr("fill", "#999999")
-        .attr("dy", "1.2em")
-        .style("font-size", nomalFontSize +"px")
+        label = graph
+            .append("text")
+            .attr("y", height - y.bandwidth() + offset_xlabel)
+            .attr("fill", "#999999")
+            .attr("dy", "1.2em")
+            .style("font-size", nomalFontSize +"px")
 
-    label
-        .append("tspan")
-        .text("Нарушение")
-        .attr("x", x(law1))
-        .attr("dx", "0.4em")
+        label
+            .append("tspan")
+            .text("Нарушение")
+            .attr("x", x(law1))
+            .attr("dx", "0.4em")
 
-    label
-        .append("tspan")
-        .text("таможенных")
-        .attr("x", x(law1))
-        .attr("dx", "0.4em")
-        .attr("dy", "1.2em")
+        label
+            .append("tspan")
+            .text("таможенных")
+            .attr("x", x(law1))
+            .attr("dx", "0.4em")
+            .attr("dy", "1.2em")
 
-    label
-        .append("tspan")
-        .text("правил")
-        .attr("x", x(law1))
-        .attr("dx", "0.4em")
-        .attr("dy", "1.2em")
+        label
+            .append("tspan")
+            .text("правил")
+            .attr("x", x(law1))
+            .attr("dx", "0.4em")
+            .attr("dy", "1.2em")
+    }
     })
 }
 
