@@ -40,6 +40,11 @@ h2 {
   color: #999999;
 }
 
+.annotation {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
 @media screen and (max-width: 600px) {
   h1 {
     font-size: 17px;
@@ -47,5 +52,8 @@ h2 {
   
   h2 {
     font-size: 12px;
+  }
+  .annotation {
+    font-size: 13px;
   }
 }
