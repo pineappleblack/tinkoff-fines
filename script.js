@@ -338,6 +338,57 @@ function build_graph() {
             .attr("x", x(law1))
             .attr("dx", "0.4em")
             .attr("dy", "1.2em")
+    } else {
+        law1 = "Статья 16.1. Незаконное перемещение через таможенную границу Таможенного союза товаров и (или) транспортных средств международной перевозки"
+        law2 = "Статья 17.7. Невыполнение законных требований прокурора, следователя, дознавателя или должностного лица, осуществляющего производство по делу об административном правонарушении"
+
+        graph
+            .append("line")
+            .attr("x1", x(law1))  
+            .attr("y1", 0 + offset_xlabel)
+            .attr("x2", x(law1)) 
+            .attr("y2", height + offset_xlabel)
+            .style("stroke-width", 0.4)
+            .style("stroke", "#999999")
+
+        graph
+            .append("line")
+            .attr("x1", x(law2))  
+            .attr("y1", 0 + offset_xlabel)
+            .attr("x2", x(law2)) 
+            .attr("y2", height + y.bandwidth() + offset_xlabel)
+            .style("stroke-width", 0.4)
+            .style("stroke", "#999999")
+
+        label = graph
+            .append("text")
+            .attr("y", height + offset_xlabel)
+            .attr("fill", "#999999")
+            .attr("dy", "1.2em")
+            .style("font-size", nomalFontSize +"px")
+
+        label
+            .append("tspan")
+            .text("Нарушение")
+            .attr("x", x(law2))
+            .attr("dx", "-0.4em")
+            .attr("text-anchor", "end")
+
+        label
+            .append("tspan")
+            .text("таможенных")
+            .attr("x", x(law2))
+            .attr("dx", "-0.4em")
+            .attr("dy", "1.2em")
+            .attr("text-anchor", "end")
+
+        label
+            .append("tspan")
+            .text("правил")
+            .attr("x", x(law2))
+            .attr("dx", "-0.4em")
+            .attr("dy", "1.2em")
+            .attr("text-anchor", "end")
     }
     })
 }
